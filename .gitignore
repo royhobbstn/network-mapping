@@ -1,3 +1,13 @@
+.idea
+
+network_data/*.geojson
+network_data/*/*.dbf
+network_data/*/*.shx
+network_data/*/*.prj
+network_data/*/*.shp
+network_data/*.zip
+mbtiles/*.mbtiles
+
 # Logs
 logs
 *.log
