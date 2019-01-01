@@ -9,9 +9,12 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import Store from './Redux/combine_reducers';
-
+import openSocket from 'socket.io-client';
+import { ioEvents} from "./WebSocket/ioEvents";
 import './index.css';
 
+const socket = openSocket('http://localhost:4005');
+window.socket = socket;
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
@@ -20,6 +23,9 @@ const store = createStore(
     applyMiddleware(thunk),
   )
 );
+
+ioEvents(store.dispatch, socket);
+
 
 ReactDOM.render(
   <Provider store={store}>
