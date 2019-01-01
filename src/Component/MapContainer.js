@@ -1,7 +1,7 @@
-// this is a container component
+//
 
 import { connect } from 'react-redux';
-import Map from './Map';
+import { Map } from './Map';
 
 const mapStateToProps = state => {
   return {
@@ -17,6 +17,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const MapContainer = connect(mapStateToProps, mapDispatchToProps)(Map);
+export const MapContainer = connect(mapStateToProps, mapDispatchToProps)(Map);
 
-export default MapContainer;

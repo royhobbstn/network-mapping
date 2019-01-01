@@ -1,7 +1,7 @@
-/* global fetch */
 
-// export function thunkClearWorkers(geoid, name) {
-//   return (dispatch, getState) => {
-//     //
-//   };
-// }
+export function thunkPressButton() {
+  return (dispatch, getState) => {
+    //
+    console.log('button pressed');
+  };
+}

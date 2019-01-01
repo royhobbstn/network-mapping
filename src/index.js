@@ -1,7 +1,9 @@
+//
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import MapContainer from './Component/MapContainer.js';
+import { AppContainer } from './Component/AppContainer.js';
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -22,8 +24,9 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <React.Fragment>
-      <MapContainer />
+      <AppContainer />
     </React.Fragment>
   </Provider>,
   document.getElementById('root')
 );
+

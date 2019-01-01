@@ -7,7 +7,7 @@ import { key } from './mapbox_api_key.js';
 
 
 
-class Map extends Component {
+export class Map extends Component {
 
   componentDidMount() {
 
@@ -39,5 +39,3 @@ class Map extends Component {
   }
 }
 
-
-export default Map;
