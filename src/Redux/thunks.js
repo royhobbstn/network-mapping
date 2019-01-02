@@ -4,6 +4,10 @@ export function thunkPressButton() {
   return (dispatch, getState) => {
     //
     console.log('button pressed');
-    window.socket.emit('map-data', 23)
+
+    // pretend they've chosen this naics category
+    const naics_string = '212';
+
+    window.socket.emit('map-data', naics_string)
   };
 }

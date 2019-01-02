@@ -3,19 +3,20 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const port = 4005;
 
-const { mapData } = require('./procedures/mapData');
+const { mapData, getWeight, routePaths, createInventory } = require('./procedures/mapData');
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
 
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-  });
-
-  socket.on('map-data', async (payload) => {
-    const response = await mapData(payload);
-    console.log(response);
-    socket.emit('data-ready', response);
+  socket.on('map-data', async (naics_string) => {
+    try {
+      const response = await mapData(naics_string);
+      socket.emit('found-records', {count: response.length, weight: getWeight(response)}); // TODO implement
+      const inventory = createInventory(response);
+      const segment_weights = await routePaths(inventory);
+      socket.emit('data-ready', segment_weights);
+    } catch(e) {
+      console.log(e);
+    }
   });
 
 });
