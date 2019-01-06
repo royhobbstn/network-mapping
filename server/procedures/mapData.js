@@ -29,20 +29,26 @@ exports.createInventory = response => {
       route_aggregator[key] += r.W;
     }
   });
-  return route_aggregator;
+
+  const inventory = [];
+  const weights = [];
+
+  Object.keys(route_aggregator).forEach(key=> {
+    const zips = key.split('-');
+    inventory.push({ from: zips[0], to: zips[1] });
+    weights.push(route_aggregator[key]);
+  });
+
+  return [inventory, weights];
+
 };
 
-exports.routePaths = async inventory => {
-  try {
+exports.routePaths = inventory => {
     const options = {
       method: 'POST',
-      uri: 'http://localhost:4006/route-data',
+      uri: 'http://localhost:4006/route-many',
       body: inventory,
       json: true
     };
-    const response = await rp(options);
-    return JSON.parse(response);
-  } catch (e) {
-    console.log(e);
-  }
+    return rp(options);
 };

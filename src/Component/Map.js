@@ -23,6 +23,27 @@ export class Map extends Component {
 
     window.map.on('load', () => {
       //
+      window.map.addLayer({
+        'id': 'network',
+        'source-layer': 'network',
+        'type': 'line',
+        'source': {
+          'maxzoom': 9,
+          "type": "vector",
+          "tiles": ["http://localhost:4002/faf/{z}/{x}/{y}.pbf"]
+        },
+        'layout': {
+          'line-cap': 'round',
+          'line-join': 'round'
+        },
+        'paint': {
+          'line-color': 'cyan',
+          'line-width': 1,
+          'line-opacity': 1
+        },
+        'filter': ["in", 'ID', 0]
+      });
+
     });
 
   }
