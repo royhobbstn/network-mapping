@@ -38,27 +38,7 @@ io.on('connection', (socket) => {
         }
       });
 
-      // TODO below should be done on client
-
-      const max_width = 4;
-      const min_width = 0.2;
-      const width_data = [];
-
-      agg_keys.forEach(key => {
-        width_data.push(Number(key));
-        width_data.push(((aggregator[key]/max_weight)*(max_width-min_width))+min_width);
-      });
-
-      const width_structure = [
-        'match',
-        ['get', 'ID'],
-        ...width_data,
-        0
-      ];
-
-      const all_segments = ["in", 'ID', ...agg_keys.map(d=> Number(d)), 0];
-
-      socket.emit('data-ready', [all_segments, width_structure]);
+      socket.emit('data-ready', [aggregator, max_weight]);
     } catch (e) {
       console.log(e);
     }

@@ -33,8 +33,8 @@ export class Map extends Component {
           "tiles": ["http://localhost:4002/faf/{z}/{x}/{y}.pbf"]
         },
         'layout': {
-          'line-cap': 'round',
-          'line-join': 'round'
+          'line-cap': 'round', // butt
+          'line-join': 'round' // miter
         },
         'paint': {
           'line-color': 'cyan',
