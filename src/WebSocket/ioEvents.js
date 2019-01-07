@@ -3,8 +3,7 @@
 export const ioEvents = (dispatch, socket) => {
   socket.on('data-ready', (msg) => {
 
-    console.time('start_time');
-    console.log('data start');
+    console.time('data_processing_time');
 
     const aggregator = msg[0];
     const max_weight = msg[1];
@@ -13,8 +12,6 @@ export const ioEvents = (dispatch, socket) => {
 
     const width_data = [];
     const opacity_data = [];
-    // const line_join_data = [];
-    // const line_cap_data = [];
 
     const agg_keys = Object.keys(aggregator);
 
@@ -22,8 +19,6 @@ export const ioEvents = (dispatch, socket) => {
       const numeric_key = Number(key);
       width_data.push(numeric_key);
       opacity_data.push(numeric_key);
-      // line_cap_data.push(numeric_key);
-      // line_join_data.push(numeric_key);
 
       const calculated_width = (aggregator[key]/max_weight)*max_line_width;
       const opacity = calculated_width < 0.5 ? calculated_width : 1;
@@ -31,10 +26,6 @@ export const ioEvents = (dispatch, socket) => {
       const actual_width = calculated_width < 0.5 ? 0.5 : calculated_width > 4 ? 4 : calculated_width;
       width_data.push(actual_width);
       opacity_data.push(opacity);
-      // const line_cap = calculated_width < 0.5 ? 'butt' : 'round';
-      // const line_join = calculated_width < 0.5 ? 'miter' : 'round';
-      // line_cap_data.push(line_cap);
-      // line_join_data.push(line_join);
     });
 
     const width_structure = [
@@ -51,33 +42,14 @@ export const ioEvents = (dispatch, socket) => {
       0
     ];
 
-    // const line_join_structure = [
-    //   'match',
-    //   ['get', 'ID'],
-    //   ...line_join_data,
-    //   'round'
-    // ];
-    //
-    // const line_cap_structure = [
-    //   'match',
-    //   ['get', 'ID'],
-    //   ...line_cap_data,
-    //   'round'
-    // ];
-
     const all_segments = ["in", 'ID', ...agg_keys.map(d=> Number(d)), 0];
 
-    console.timeEnd('start_time');
-    console.log('start painting');
-    console.time('paint_start');
+    console.timeEnd('data_processing_time');
+
+    console.time('paint_time');
     window.map.setFilter('network', all_segments);
     window.map.setPaintProperty('network', 'line-width', width_structure);
     window.map.setPaintProperty('network', 'line-opacity', opacity_structure);
-    // data-driven line-cap not yet implemented by Mapbox
-    // window.map.setLayoutProperty('network', 'line-cap', line_cap_structure);
-    // window.map.setLayoutProperty('network', 'line-join', line_join_structure);
-
-    console.timeEnd('paint_start');
-    console.log('done painting');
+    console.timeEnd('paint_time');
   });
 };
