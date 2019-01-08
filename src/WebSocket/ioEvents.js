@@ -8,24 +8,23 @@ export const ioEvents = (dispatch, socket) => {
     const aggregator = msg[0];
     const max_weight = msg[1];
 
-    const max_line_width = 8;
+    const max_line_width = 6;
 
     const width_data = [];
-    const opacity_data = [];
+    const color_data = [];
 
     const agg_keys = Object.keys(aggregator);
 
     agg_keys.forEach(key => {
       const numeric_key = Number(key);
       width_data.push(numeric_key);
-      opacity_data.push(numeric_key);
+      color_data.push(numeric_key);
 
       const calculated_width = (aggregator[key]/max_weight)*max_line_width;
-      const opacity = calculated_width < 0.5 ? calculated_width : 1;
-      // until line-cap implemented, set threshold max width at 4.
-      const actual_width = calculated_width < 0.5 ? 0.5 : calculated_width > 4 ? 4 : calculated_width;
+      const actual_width = calculated_width < 0.5 ? 0.5 : calculated_width;
+      const calculated_color = getCalculatedColor(calculated_width);
       width_data.push(actual_width);
-      opacity_data.push(opacity);
+      color_data.push(calculated_color);
     });
 
     const width_structure = [
@@ -35,11 +34,11 @@ export const ioEvents = (dispatch, socket) => {
       0
     ];
 
-    const opacity_structure = [
+    const color_structure = [
       'match',
       ['get', 'ID'],
-      ...opacity_data,
-      0
+      ...color_data,
+      'cyan'
     ];
 
     const all_segments = ["in", 'ID', ...agg_keys.map(d=> Number(d)), 0];
@@ -49,7 +48,23 @@ export const ioEvents = (dispatch, socket) => {
     console.time('paint_time');
     window.map.setFilter('network', all_segments);
     window.map.setPaintProperty('network', 'line-width', width_structure);
-    window.map.setPaintProperty('network', 'line-opacity', opacity_structure);
+    window.map.setPaintProperty('network', 'line-color', color_structure);
     console.timeEnd('paint_time');
   });
 };
+
+function getCalculatedColor(calculated_width) {
+  if(calculated_width >= 0.5) {
+    return '#00ffff';
+  } else if(calculated_width > 0.4) {
+    return '#35dada';
+  } else if(calculated_width > 0.3) {
+    return '#43b6b6';
+  } else if(calculated_width > 0.2) {
+    return '#479593';
+  } else if(calculated_width > 0.1) {
+    return '#467472';
+  } else {
+    return '#405453';
+  }
+}

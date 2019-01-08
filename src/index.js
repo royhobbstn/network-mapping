@@ -11,6 +11,7 @@ import thunk from 'redux-thunk';
 import Store from './Redux/combine_reducers';
 import openSocket from 'socket.io-client';
 import { ioEvents} from "./WebSocket/ioEvents";
+import 'semantic-ui-css/semantic.min.css'
 import './index.css';
 
 const socket = openSocket('http://localhost:4005');
