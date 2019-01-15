@@ -3,8 +3,6 @@
 import { connect } from 'react-redux';
 import { App } from './App';
 
-import { thunkPressButton } from '../Redux/thunks';
-
 const mapStateToProps = state => {
   return {
     // source_geography: state.map.source_geography,
@@ -13,9 +11,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    pressButton: () => {
-      dispatch(thunkPressButton());
-    },
+    //
   };
 };
 

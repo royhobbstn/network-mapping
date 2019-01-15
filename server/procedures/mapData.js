@@ -1,9 +1,9 @@
 
 const rp = require('request-promise');
 
-exports.mapData = async (naics_string) => {
+exports.mapData = async (sctg_string) => {
   try {
-    const response = await rp(`http://localhost:4001/get-data?naics=${naics_string}`);
+    const response = await rp(`http://localhost:4001/get-data?sctg=${sctg_string}`);
     return JSON.parse(response).data;
   } catch (e) {
     console.log(e);

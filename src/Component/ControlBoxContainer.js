@@ -3,19 +3,26 @@
 import { connect } from 'react-redux';
 import { ControlBox } from './ControlBox';
 
-// import { thunkPressButton } from '../Redux/thunks';
+import { actionUpdateSctg } from '../Redux/actions';
 
 const mapStateToProps = state => {
   return {
-    // source_geography: state.map.source_geography,
+    selected_sctg: state.map.selected_sctg,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    // pressButton: () => {
-    //   dispatch(thunkPressButton());
-    // },
+    toggleSctg: (evt, data) => {
+      dispatch(actionUpdateSctg(data.value));
+    },
+    togglePaint: (selected_layers) => {
+      if(selected_layers.length) {
+        window.socket.emit('map-data', selected_layers.join(','));
+      } else {
+        // clear map
+      }
+      },
   };
 };
 

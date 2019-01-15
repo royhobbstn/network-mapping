@@ -1,7 +1,7 @@
 // reducer
 
 const default_state = {
-
+  selected_sctg: []
 };
 
 const map = (
@@ -9,8 +9,8 @@ const map = (
   action
 ) => {
   switch (action.type) {
-    // case 'UPDATE_ZOOM_MESSAGE':
-    //   return Object.assign({}, state, { map_zoom: action.zoom });
+    case 'UPDATE_SCTG':
+      return Object.assign({}, state, { selected_sctg: action.selections });
     default:
       return state;
   }

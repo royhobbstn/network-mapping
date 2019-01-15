@@ -3,12 +3,16 @@
 import React from 'react';
 import { MapContainer } from './MapContainer';
 import { ControlBoxContainer } from './ControlBoxContainer';
+import GithubCorner from 'react-github-corner';
 
-const button_css = {position: 'absolute', top: '20px', left: '20px', width: '100px', zIndex: '50'};
-
-export const App = ({pressButton}) => {
+export const App = () => {
   return <React.Fragment>
-    <button style={button_css} onClick={pressButton}>Press</button>
+    <GithubCorner
+      style={{position: 'absolute', zIndex: '100', top: '2px', right: '2px'}}
+      href="https://github.com/royhobbstn/network-mapping"
+      octoColor="black"
+      bannerColor="white"
+    />
     <ControlBoxContainer />
     <MapContainer />
   </React.Fragment>

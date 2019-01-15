@@ -1,0 +1,13 @@
+
+
+.ui.selection.dropdown .visible.menu.transition div.item {
+    height: 28px;
+    line-height: 18px;
+    padding: 4px 4px 4px 10px !important;
+}
+
+.visible.menu.transition div.item span {
+    font-size: 12px;
+    word-wrap: unset;
+    overflow: hidden;
+}

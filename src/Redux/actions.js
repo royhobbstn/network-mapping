@@ -1,8 +1,8 @@
 //
 
-// export function updateDataset(dataset) {
-//   return {
-//     type: 'UPDATE_DATASET',
-//     dataset
-//   };
-// }
+export function actionUpdateSctg(selections) {
+  return {
+    type: 'UPDATE_SCTG',
+    selections
+  };
+}

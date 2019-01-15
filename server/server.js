@@ -7,12 +7,15 @@ const {mapData, getWeight, routePaths, createInventory} = require('./procedures/
 
 io.on('connection', (socket) => {
 
-  socket.on('map-data', async (naics_string) => {
+  socket.on('map-data', async (sctg_string) => {
     try {
-      const response = await mapData(naics_string);
+      const response = await mapData(sctg_string);
+      console.log(response);
       socket.emit('found-records', {count: response.length, weight: getWeight(response)}); // TODO implement
       const [inventory, weights] = createInventory(response);
+      console.log('about to route');
       const segment_weights = await routePaths(inventory);
+      console.log('routed');
 
       // inventory, weights, segment_weights refer to same zip-zip routes in the same order
       const len = weights.length;
@@ -37,6 +40,7 @@ io.on('connection', (socket) => {
           max_weight = aggregator[key];
         }
       });
+      console.log('about to send back to client');
 
       socket.emit('data-ready', [aggregator, max_weight]);
     } catch (e) {
