@@ -11,7 +11,7 @@ io.on('connection', (socket) => {
     try {
       const response = await mapData(sctg);
       console.log(`Found: ${response.length} records.`);
-      socket.emit('found-records', {count: response.length, weight: getWeight(response)}); // TODO implement
+      socket.emit('found-records', {count: response.length, weight: getWeight(response)});
       const [inventory, weights] = createInventory(response);
       console.log('about to route');
       const segment_weights = await routePaths(inventory);

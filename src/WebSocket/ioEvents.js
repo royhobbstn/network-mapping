@@ -1,7 +1,14 @@
 // event listener to catch and dispatch (redux) socket communication
+import React from 'react';
+import { toast } from 'react-toastify';
 
 export const ioEvents = (dispatch, socket) => {
+  socket.on('found-records', (msg) => {
+    toast.info(<div>Found {parseInt(msg.count).toLocaleString()} records ({parseInt(msg.weight).toLocaleString()} shipments).<br />Routing...</div>);
+  });
+
   socket.on('data-ready', (msg) => {
+    toast.success('Routing completed.  Drawing...');
 
     console.time('data_processing_time');
 
