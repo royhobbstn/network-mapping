@@ -3,7 +3,7 @@
 import { connect } from 'react-redux';
 import { ControlBox } from './ControlBox';
 
-import { actionUpdateSctg } from '../Redux/actions';
+import { thunkUpdateSctg } from '../Redux/thunks';
 
 const mapStateToProps = state => {
   return {
@@ -14,15 +14,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     toggleSctg: (evt, data) => {
-      dispatch(actionUpdateSctg(data.value));
+      dispatch(thunkUpdateSctg(data.value));
     },
-    togglePaint: (selected_layers) => {
-      if(selected_layers.length) {
-        window.socket.emit('map-data', selected_layers.join(','));
-      } else {
-        // clear map
-      }
-      },
   };
 };
 

@@ -1,7 +1,7 @@
 // reducer
 
 const default_state = {
-  selected_sctg: []
+  selected_sctg: ""
 };
 
 const map = (
@@ -10,7 +10,7 @@ const map = (
 ) => {
   switch (action.type) {
     case 'UPDATE_SCTG':
-      return Object.assign({}, state, { selected_sctg: action.selections });
+      return Object.assign({}, state, { selected_sctg: action.selection });
     default:
       return state;
   }

@@ -12,15 +12,12 @@ export const ControlBox = ({selected_sctg, toggleSctg, togglePaint}) => {
   return <Container style={control_style}>
     <div style={{width: '400px', padding: '5px', fontSize: '10px'}}>
       <Dropdown
-        clearable
         fluid
-        multiple
         selection
         options={sctg_options}
         placeholder='Select Category'
         value={selected_sctg}
         onChange={toggleSctg}
-        onClose={()=>togglePaint(selected_sctg)}
       />
     </div>
   </Container>

@@ -16,7 +16,7 @@ export const sctg_options = [
   {value: "13", key: "13", text: "Other Non-Metallic Minerals not elsewhere classified"},
   {value: "14", key: "14", text: "Metallic Ores and Concentrates"},
   {value: "15", key: "15", text: "Coal"},
-  {value: "16", key: "16", text: "Crude Petroleum"},
+  // {value: "16", key: "16", text: "Crude Petroleum"},
   {value: "17", key: "17", text: "Gasoline, Aviation Turbine Fuel, and Ethanol (includes..."},
   {value: "18", key: "18", text: "Fuel Oils (includes Diesel, Bunker C, and Biodiesel)"},
   {value: "19", key: "19", text: "Other Coal and Petroleum Products, not elsewhere..."},
@@ -46,7 +46,5 @@ export const sctg_options = [
   },
   {value: "40", key: "40", text: "Miscellaneous Manufactured Products"},
   {value: "41", key: "41", text: "Waste and Scrap (excludes of agriculture or food, see 041xx)"},
-  {value: "43", key: "43", text: "Mixed Freight"},
-  {value: "99", key: "99", text: "Missing Code"},
-  {value: "00", key: "00", text: "Commodity code suppressed"}
+  {value: "43", key: "43", text: "Mixed Freight"}
 ];

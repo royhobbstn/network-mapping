@@ -7,10 +7,10 @@ const {mapData, getWeight, routePaths, createInventory} = require('./procedures/
 
 io.on('connection', (socket) => {
 
-  socket.on('map-data', async (sctg_string) => {
+  socket.on('map-data', async (sctg) => {
     try {
-      const response = await mapData(sctg_string);
-      console.log(response);
+      const response = await mapData(sctg);
+      console.log(`Found: ${response.length} records.`);
       socket.emit('found-records', {count: response.length, weight: getWeight(response)}); // TODO implement
       const [inventory, weights] = createInventory(response);
       console.log('about to route');
@@ -19,6 +19,7 @@ io.on('connection', (socket) => {
 
       // inventory, weights, segment_weights refer to same zip-zip routes in the same order
       const len = weights.length;
+      console.log({len});
 
       // create a lookup of all road segment ids with corresponding weights
       const aggregator = {};

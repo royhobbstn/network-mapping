@@ -1,9 +1,9 @@
 
 const rp = require('request-promise');
 
-exports.mapData = async (sctg_string) => {
+exports.mapData = async (sctg) => {
   try {
-    const response = await rp(`http://localhost:4001/get-data?sctg=${sctg_string}`);
+    const response = await rp(`https://hgn2hpryre.execute-api.us-west-2.amazonaws.com/dev/get-data?sctg=${sctg}`);
     return JSON.parse(response).data;
   } catch (e) {
     console.log(e);

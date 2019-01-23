@@ -1,8 +1,8 @@
 //
 
-export function actionUpdateSctg(selections) {
+export function actionUpdateSctg(selection) {
   return {
     type: 'UPDATE_SCTG',
-    selections
+    selection
   };
 }
